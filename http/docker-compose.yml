@@ -1,0 +1,10 @@
+version: "3.4"
+
+services:
+  app:
+    build: .
+    container_name: tutor.app
+    hostname: tutor.app
+    image: tutor.app
+    ports:
+      - 3000:3000

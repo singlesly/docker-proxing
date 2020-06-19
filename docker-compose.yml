@@ -1,0 +1,34 @@
+version: "3.3"
+
+networks:
+  pack:
+
+services:
+  http:
+    image: tutor.app
+    networks:
+      - pack
+  ws:
+    image: tutor.websocket
+    environment:
+      - "PORT=3001"
+    networks:
+      - pack
+
+  front:
+    image: tutor.frontend
+    networks:
+      - pack
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - pack
+    depends_on:
+      - front
+      - ws
+      - http
